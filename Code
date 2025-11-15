@@ -1,0 +1,68 @@
+#include <stdio.h>
+#include <conio.h>  // used for getch
+
+int main() {
+    printf("\n----------MULTIPLAYER MODE----------\n\n");
+    int players; 
+    printf("Enter number of players (2-10): ");
+    scanf("%d", &players);
+    if (players < 2 || players > 10) {
+        printf("Please enter a valid number between 2 and 10.\n");
+        return 0;
+    }
+    printf("\n1 = ROCK\n2 = PAPER\n3 = SCISSOR\n");
+    printf("Each player will enter their choice secretly.\n\n");
+
+    char moves[10];
+    int rock=0, paper = 0, scissors=0;
+    int i;
+    for (i=0; i<players; i++) {
+        while(1) {
+            printf("Player %d, make a choice: ", i+1);
+            moves[i] = getch();     //to read hidden input
+       printf("*\n");
+            if (moves[i]=='1' || moves[i]=='2' || moves[i]=='3') {
+        break;
+            }
+            printf("Invalid choice! enter only 1,2,3\n"); }
+        if (moves[i]=='1') rock++;
+        else if (moves[i]=='2') paper++;
+        else scissors++;
+    }
+
+   printf("\n--- REVEAL ---\n");
+for (i = 0; i < players; i++) {
+    printf("Player %d chose ", i + 1);
+
+    if (moves[i] == '1')
+        printf("ROCK\n");
+    else if (moves[i] == '2')
+        printf("PAPER\n");
+    else
+        printf("SCISSOR\n");
+}
+    
+    if ( (rock>0 && paper>0 && scissors>0) ||
+         rock==players || paper==players || scissors==players ) {
+
+         printf("\nResult: It's a DRAW!\n");
+         return 0;
+    }
+   char win;
+    if (rock>0 && paper>0 && scissors==0)
+        win='2';
+    else if (rock>0 && scissors>0 && paper==0)
+        win='1';
+    else
+     win='3';
+
+  printf("\nWinning Move: %c\n", win);
+       printf("Winner(s): ");
+
+ for (i=0;i<players;i++){
+    if (moves[i]==win){
+            printf("Player %d ", i+1);
+}  }
+    printf("\n");
+    return 0;
+}
